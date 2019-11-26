@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./skill-recommendation.component.scss']
 })
 export class SkillRecommendationComponent implements OnInit {
-  loading = false ;
-  data = [
+
+  public skill = 'Java';
+  public loading = false ;
+
+  public data = [
     {
       title: 'Title 1'
     },
