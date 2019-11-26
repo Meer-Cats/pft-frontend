@@ -1,12 +1,10 @@
 <nz-layout class="app-layout">
-  <nz-layout>
-    <div style="margin: auto;">
-      <nz-content>
-        <div class="inner-content">
-          <router-outlet></router-outlet>
-        </div>
-      </nz-content>
-    </div>
-    <nz-footer><div style="text-align: center;">Pray for Talent ©2019 Implement By MeerCats</div></nz-footer>
-  </nz-layout>
+  <div style="display: flex; margin: auto; width: 80%;">
+    <nz-content class="inner-content">
+      <router-outlet></router-outlet>
+    </nz-content>
+  </div>
+  <nz-footer style="padding: .5%">
+    <div style="text-align: center;">Pray for Talent ©2019 Implement By MeerCats</div>
+  </nz-footer>
 </nz-layout>

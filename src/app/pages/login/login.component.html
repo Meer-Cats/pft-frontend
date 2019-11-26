@@ -1,22 +1,28 @@
-<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-  <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your username!">
-      <nz-input-group nzPrefixIcon="user">
-        <input type="text" nz-input formControlName="userName" placeholder="Username"/>
-      </nz-input-group>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your Password!">
-      <nz-input-group nzPrefixIcon="lock">
-        <input type="password" nz-input formControlName="password" placeholder="Password"/>
-      </nz-input-group>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control>
-      <a class="login-form-forgot">Forgot password</a>
-      <button nz-button class="login-form-button" [nzType]="'primary'">Log in</button>
-    </nz-form-control>
-  </nz-form-item>
-</form>
+<div style="margin: auto; width: 30%">
+  <img style="width: 60%; margin-bottom: 4%; border-radius: 10%; margin-left: auto; margin-right: auto; display: block"
+       src="./assets/client-logo.png"
+       alt="Client logo"/>
+  <form style="margin: auto" nz-form [formGroup]="validateForm" class="login-form"
+        (ngSubmit)="submitForm()">
+    <nz-form-item style="margin-bottom: 0">
+      <nz-form-control nzErrorTip="Please input your username!">
+        <nz-input-group nzPrefixIcon="user">
+          <input type="text" nz-input formControlName="userName" placeholder="Username"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item style="margin-bottom: 0">
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-input-group nzPrefixIcon="lock">
+          <input type="password" nz-input formControlName="password" placeholder="Password"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item style="margin-bottom: 0">
+      <nz-form-control>
+        <a class="login-form-forgot">Forgot password</a>
+        <button nz-button class="login-form-button" [nzType]="'primary'">Log in</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
