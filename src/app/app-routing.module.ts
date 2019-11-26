@@ -5,7 +5,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
   { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) },
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
-  { path: 'employee/skill-recommendation', loadChildren: () => import('./pages/employee/employee.module').then(m => m.EmployeeModule)}
+  { path: 'employee', loadChildren: () => import('./pages/employee/employee.module').then(m => m.EmployeeModule)}
 ];
 
 @NgModule({

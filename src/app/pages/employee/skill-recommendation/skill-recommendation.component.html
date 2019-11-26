@@ -1,5 +1,8 @@
 <nz-layout>
   <div>
+    <h2 nz-title>Who will you ask for {{skill}} questions </h2>
+  </div>
+  <div>
     <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
       <input type="text" nz-input placeholder="input search text" />
     </nz-input-group>
@@ -24,5 +27,8 @@
         </ng-template>
       </ng-template>
     </nz-list>
+  </div>
+  <div>
+    <button nz-button [nzSize]="500" nzType="primary">Primary</button>
   </div>
 </nz-layout>
