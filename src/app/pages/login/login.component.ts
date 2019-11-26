@@ -28,7 +28,10 @@ export class LoginComponent implements OnInit {
         this.validateForm.controls[i].updateValueAndValidity();
       }
     }
-
-    this.router.navigate(['employee']);
+    if (this.validateForm.controls.userName.value === 'RH') {
+      this.router.navigate(['humanresource']);
+    } else {
+      this.router.navigate(['employee']);
+    }
   }
 }

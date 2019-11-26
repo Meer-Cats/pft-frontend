@@ -1,14 +1,18 @@
 <nz-layout>
   <div>
-    <h2 nz-title>Who will you ask for {{skill}} questions </h2>
+    <h2 nz-title>Looking for a skill ?</h2>
   </div>
   <div>
-    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-      <input type="text" nz-input placeholder="input search text" />
-    </nz-input-group>
-    <ng-template #suffixIconButton>
-      <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
-    </ng-template>
+    <nz-select
+      [nzMaxTagCount]="3"
+      [nzMaxTagPlaceholder]="tagPlaceHolder"
+      nzMode="multiple"
+      nzPlaceHolder="Please select"
+      [(ngModel)]="selectedSkills"
+    >
+      <nz-option *ngFor="let skill of skillsList" [nzLabel]="skill.name" [nzValue]="skill.id"></nz-option>
+    </nz-select>
+    <ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected </ng-template>
   </div>
   <div>
     <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
@@ -29,6 +33,6 @@
     </nz-list>
   </div>
   <div>
-    <button nz-button [nzSize]="500" nzType="primary">Recommend</button>
+    <button nz-button [nzSize]="500" nzType="primary">Request</button>
   </div>
 </nz-layout>
