@@ -10,8 +10,7 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
-              private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -23,14 +22,13 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log('CA MARCHE');
     for (const i in this.validateForm.controls) {
       if (i != null) {
         this.validateForm.controls[i].markAsDirty();
         this.validateForm.controls[i].updateValueAndValidity();
       }
     }
-    console.log('PASSE');
-    this.router.navigate(['employee/skill-recommendation']);
+
+    this.router.navigate(['employee']);
   }
 }

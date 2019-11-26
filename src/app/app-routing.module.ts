@@ -1,15 +1,17 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from './pages/login/login.component';
+import {EmployeeComponent} from './pages/employee/employee.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/login' },
-  { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) },
-  { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
-  { path: 'employee/skill-recommendation', loadChildren: () => import('./pages/employee/employee.module').then(m => m.EmployeeModule)}
+  {path: '', pathMatch: 'full', redirectTo: '/login'},
+  {path: 'login', component: LoginComponent},
+  {path: 'employee', component: EmployeeComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
