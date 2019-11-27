@@ -2,12 +2,12 @@
   <img style="width: 60%; margin-bottom: 4%; border-radius: 10%; margin-left: auto; margin-right: auto; display: block"
        src="./assets/client-logo.png"
        alt="Client logo"/>
-  <form style="margin: auto" nz-form [formGroup]="validateForm" class="login-form"
+  <form style="margin: auto;" nz-form [formGroup]="validateForm" class="login-form"
         (ngSubmit)="submitForm()">
     <nz-form-item style="margin-bottom: 0">
       <nz-form-control nzErrorTip="Please input your username!">
         <nz-input-group nzPrefixIcon="user">
-          <input type="text" nz-input formControlName="userName" placeholder="Username"/>
+          <input type="text" nz-input formControlName="username" placeholder="Username"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
@@ -21,7 +21,9 @@
     <nz-form-item style="margin-bottom: 0">
       <nz-form-control>
         <a class="login-form-forgot">Forgot password</a>
-        <button nz-button class="login-form-button" [nzType]="'primary'">Log in</button>
+        <button nz-button [disabled]="validateForm.untouched || validateForm.pristine" class="login-form-button"
+                [nzType]="'primary'">Log in
+        </button>
       </nz-form-control>
     </nz-form-item>
   </form>

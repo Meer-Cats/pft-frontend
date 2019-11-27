@@ -4,22 +4,23 @@ import {Observable} from 'rxjs';
 import {Employee} from '../models/employee';
 import {map} from 'rxjs/operators';
 import {ApiCollectionResponse} from './api-collection-response';
+import {User} from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeApiService {
-  private loginUrl = '';
+  private loginUrl = 'http://192.168.43.200:8080/session/login';
   private logoutUrl = '';
   private searchUrl = '';
 
   public constructor(
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
-  public login(employee: Employee): Observable<Employee> {
-    return this.http
-      .post<Employee>(this.loginUrl, employee);
+  public login(mail: string, password: string): Observable<User> {
+    return this.http.post<User>(this.loginUrl, {mail, password});
   }
 
   public logout(employee: Employee): Observable<Employee> {

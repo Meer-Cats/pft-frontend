@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {BannerService} from '../services/banner.service';
+import {CurrentUserService} from '../services/current-user.service';
 
 @Component({
   selector: 'app-banner',
@@ -7,6 +8,6 @@ import {BannerService} from '../services/banner.service';
   styleUrls: ['./banner.component.scss']
 })
 export class BannerComponent {
-  constructor(private s: BannerService) {
+  constructor(private s: BannerService, private user: CurrentUserService) {
   }
 }
