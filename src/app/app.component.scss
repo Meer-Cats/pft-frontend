@@ -11,4 +11,8 @@
 
 .app-layout {
   height: 100vh;
+    background: url("src/assets/background-1.png");
+  ::ng-deep nz-footer {
+    background: transparent;
+  }
 }
