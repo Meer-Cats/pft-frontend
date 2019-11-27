@@ -41,4 +41,6 @@ export class LookingForSkillComponent implements OnInit {
     this.skillsList.push({ id: '5', name: 'Management' });
   }
 
+
+
 }

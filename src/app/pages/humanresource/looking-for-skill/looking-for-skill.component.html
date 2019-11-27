@@ -17,7 +17,7 @@
   <div>
     <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
       <ng-template #item let-item>
-        <nz-card style="width: 300px;margin-top: 16px">
+        <nz-card nzHoverable style="width: 300px;margin-top: 16px" [nzCover]="avatarTemplate">
           <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
             <nz-card-meta
               [nzAvatar]="avatarTemplate"
