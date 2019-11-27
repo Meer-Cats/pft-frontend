@@ -1,12 +1,14 @@
 <nz-header>
-  <div *ngIf="s.show$ | async" style="display: flex;">
+  <div *ngIf="s.show$ | async" style="display: flex; height:64px;">
     <img style="display: block; width: 5%" src="./assets/client-logo.png"
          alt="Logo"/>
     <img style="display: block; width: 5%" src="./assets/client-logo.png"
          alt="Client logo"/>
-    <div>
-      <img style="display: block; width: 30%" [src]="(user.currentUser$ | async)?.avatar"
-           alt="Avatar"/>
+    <div style="position: absolute; right: 15%; display: flex;">
+      <!-- <img style="display: block;"  [src]="(user.currentUser$ | async)?.avatar"
+           alt="Avatar"/>-->
+      <nz-avatar [nzShape]="'square'" [nzSize]="64" [nzIcon]="'user'" [nzSrc]="(user.currentUser$ | async)?.avatar"></nz-avatar>
+      <h5 nzTitle>{{(user.currentUser$ | async)?.name}} {{(user.currentUser$ | async)?.surname}}</h5>
     </div>
   </div>
 </nz-header>
