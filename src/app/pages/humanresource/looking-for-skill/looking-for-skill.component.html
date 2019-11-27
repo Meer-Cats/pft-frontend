@@ -8,32 +8,40 @@
       [nzMaxTagPlaceholder]="tagPlaceHolder"
       nzMode="single"
       nzPlaceHolder="Please select"
-      [(ngModel)]="selectedSkill"
+      [(ngModel)]="selectedSkills"
       (ngModelChange)="update()"
     >
-      <nz-option *ngFor="let skill of skillsList" [nzLabel]="skill.name" [nzValue]="skill.id"></nz-option>
+      <nz-option *ngFor="let skill of skillsList" [nzLabel]="skill" [nzValue]="skill"></nz-option>
     </nz-select>
     <ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected </ng-template>
   </div>
   <div>
-    <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
+    <nz-list [nzDataSource]="employees" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
       <ng-template #item let-item>
-        <nz-card nzHoverable style="width: 300px;margin-top: 16px" [nzCover]="avatarTemplate">
+        <nz-card (click)="selectEmployee(item)" nzHoverable style="width: 300px;margin-top: 16px">
           <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
             <nz-card-meta
               [nzAvatar]="avatarTemplate"
-              nzTitle="Card title"
-              nzDescription="This is the description"
+              nzTitle="{{item.name}} {{item.surname}}"
             ></nz-card-meta>
           </nz-skeleton>
         </nz-card>
         <ng-template #avatarTemplate>
-          <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+          <nz-avatar [nzSrc]="getAvatar(item)"></nz-avatar>
         </ng-template>
       </ng-template>
     </nz-list>
   </div>
   <div>
-    <button nz-button nzType="primary">Request</button>
+    <button (click)="showModal()" nz-button nzType="primary">Request</button>
   </div>
 </nz-layout>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Invite employees"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzOkLoading]="isOkLoading"
+>
+  <p>Modal Content</p>
+</nz-modal>

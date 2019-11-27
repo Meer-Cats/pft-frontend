@@ -13,7 +13,7 @@ import {Question} from '../models/question';
 export class EmployeeApiService {
   private loginUrl = 'http://192.168.43.200:8080/session/login';
   private logoutUrl = '';
-  private searchUrl = 'http://192.168.43.200:8080/search';
+  private searchUrl = 'http://192.168.43.200:8080/employee/search';
   private employeesUrl = 'http://192.168.43.200:8080/employee/all';
   private recommendUrl = 'http://192.168.43.200:8080/employee/recommend';
 
@@ -36,9 +36,9 @@ export class EmployeeApiService {
       .post<Employee>(this.logoutUrl, employee);
   }
 
-  public search(query: string): Observable<Employee[]> {
+  public search(skills: string[]): Observable<Employee[]> {
     return this.http
-      .get<ApiCollectionResponse<Employee>>(this.searchUrl + query)
+      .get<ApiCollectionResponse<Employee>>(this.searchUrl.concat('?skills=[', ...skills, ']'))
       .pipe(
         map(r => r.data.items)
       );
