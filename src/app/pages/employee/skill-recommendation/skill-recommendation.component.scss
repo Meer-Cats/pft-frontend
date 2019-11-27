@@ -18,9 +18,9 @@ nz-card:active, nz-card.active {
   border-color: #412554;
   color: #412554;
 }
-.ant-input-group-addon{
-  background: transparent;
-}
-span.ant-input-group-addon {
+
+nz-input-group.ant-input-search-enter-button.ant-input-search.ant-input-group-wrapper
+  span.ant-input-wrapper.ant-input-group
+  span.ant-input-group-addon {
   background: transparent;
 }
