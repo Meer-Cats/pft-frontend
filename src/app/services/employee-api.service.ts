@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Employee} from '../models/employee';
 import {map} from 'rxjs/operators';
@@ -23,7 +23,12 @@ export class EmployeeApiService {
   }
 
   public login(mail: string, password: string): Observable<User> {
-    return this.http.post<User>(this.loginUrl, {mail, password}, {withCredentials: true});
+    return this.http.post<User>(this.loginUrl, {mail, password}, { headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'OPTIONS, POST',
+      }), withCredentials: true});
   }
 
   public logout(employee: Employee): Observable<Employee> {

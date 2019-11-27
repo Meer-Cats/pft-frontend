@@ -8,11 +8,17 @@
 }
 
 nz-card:hover {
-  border-color: deeppink;
-  color: deeppink;
+  border-color: #412554;
+  color: #412554;
   cursor: pointer;
 }
 
 nz-card:active, nz-card.active {
-  background: greenyellow;
+  background: #ad777c;
+  border-color: #412554;
+  color: #412554;
+}
+
+span.ant-input-group-addon {
+  background-color: transparent;
 }
