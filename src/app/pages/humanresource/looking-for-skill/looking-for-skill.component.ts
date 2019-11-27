@@ -90,17 +90,19 @@ export class LookingForSkillComponent implements OnInit {
   public onOk(result: Date): void {}
 
   public submitInvitation(): void {
+    for (const i in this.validateForm.controls) {
+      if (i != null) {
+        this.validateForm.controls[i].markAsDirty();
+        this.validateForm.controls[i].updateValueAndValidity();
+      }
+    }
+
     const mails: string[] = this.selectedEmployees.map(e => e.mail);
     const subject: string = this.validateForm.controls.subject.value;
     const message: string = this.validateForm.controls.message.value;
     const inviteDate: Date = this.validateForm.controls.inviteDate.value;
 
     const employeesName: string[] = this.selectedEmployees.map(e => `${e.name} ${e.surname}`);
-
-    console.log(mails);
-    console.log(subject);
-    console.log(message);
-    console.log(inviteDate);
 
     this.employeeService.invite(mails, subject, message, inviteDate)
       .subscribe(() => {
