@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { SkillRecommendationComponent } from './skill-recommendation/skill-recommendation.component';
+import {NgModule} from '@angular/core';
+import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {SkillRecommendationComponent} from './skill-recommendation/skill-recommendation.component';
 import {EmployeeComponent} from './employee.component';
 
 @NgModule({
@@ -12,4 +12,5 @@ import {EmployeeComponent} from './employee.component';
   ]
 })
 
-export class EmployeeModule { }
+export class EmployeeModule {
+}
