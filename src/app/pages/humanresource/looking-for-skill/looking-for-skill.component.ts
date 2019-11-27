@@ -5,6 +5,7 @@ import {EmployeeApiService} from '../../../services/employee-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Observable, of} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {NzNotificationService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-looking-for-skill',
@@ -28,6 +29,7 @@ export class LookingForSkillComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private bannerService: BannerService,
     private formBuilder: FormBuilder,
+    private notificationService: NzNotificationService,
     private employeeService: EmployeeApiService) {
     bannerService.show$.next(true);
   }
@@ -93,6 +95,8 @@ export class LookingForSkillComponent implements OnInit {
     const message: string = this.validateForm.controls.message.value;
     const inviteDate: Date = this.validateForm.controls.inviteDate.value;
 
+    const employeesName: string[] = this.selectedEmployees.map(e => `${e.name} ${e.surname}`);
+
     console.log(mails);
     console.log(subject);
     console.log(message);
@@ -101,7 +105,11 @@ export class LookingForSkillComponent implements OnInit {
     this.employeeService.invite(mails, subject, message, inviteDate)
       .subscribe(() => {
           this.closeDrawer();
-          // TODO: ajouter une alerte
+          this.notificationService.create(
+            'success',
+            'Mail successfuly send',
+            `${employeesName.join(', ')} were notified of your invitation`
+          );
         }
       );
   }
