@@ -2,6 +2,10 @@ nz-select {
   width: 100%;
 }
 
+.plop {
+  background: transparent;
+}
+
 nz-card:hover {
   border-color: #412554;
   color: #412554;
@@ -16,4 +20,22 @@ nz-card:active, nz-card.active {
 
 span.ant-input-group-addon {
   background-color: transparent;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  border-top: 1px solid rgb(232, 232, 232);
+  padding: 10px 16px;
+  text-align: right;
+  left: 0px;
+  background: #fff;
+}
+
+nz-date-picker,
+nz-month-picker,
+nz-range-picker,
+nz-week-picker {
+  margin: 0 8px 12px 0;
 }

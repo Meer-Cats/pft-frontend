@@ -37,15 +37,78 @@
     </nz-list>
   </div>
   <div>
-    <button (click)="showModal()" nz-button nzType="primary">Request</button>
+    <button (click)="showDrawer()" nz-button nzType="primary">Request</button>
   </div>
 </nz-layout>
-<nz-modal
-  [(nzVisible)]="isVisible"
-  nzTitle="Invite employees"
-  (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()"
-  [nzOkLoading]="isOkLoading"
+
+<nz-drawer
+  [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+  [nzMaskClosable]="false"
+  [nzWidth]="720"
+  [nzVisible]="isVisible"
+  nzTitle="Employees invitation"
+  (nzOnClose)="closeDrawer()"
 >
-  <p>Modal Content</p>
-</nz-modal>
+  <div>
+    <h4 nz-title>Selected employees</h4>
+  </div>
+  <nz-list [nzDataSource]="selectedEmployees" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, xs: 24, sm: 12, md: 6, lg: 6, xl: 4 }">
+    <ng-template #item let-item>
+      <nz-list-item [nzContent]="nzContent">
+        <ng-template #nzContent>
+          <nz-avatar [nzSrc]="getAvatar(item)"></nz-avatar>
+        </ng-template>
+      </nz-list-item>
+    </ng-template>
+  </nz-list>
+
+  <form nz-form [formGroup]="validateForm">
+    <div nz-row nzGutter="8">
+      <div nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label>Subject</nz-form-label>
+          <nz-form-control>
+            <input type="text" nz-input formControlName="subject" placeholder="Please, enter a mail subject" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row nzGutter="8">
+      <div nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label>Message</nz-form-label>
+          <nz-form-control>
+            <textarea
+              nz-input
+              placeholder="Please, enter a mail content"
+              formControlName="message"
+              [nzAutosize]="{ minRows: 10, maxRows: 10 }"
+            ></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row nzGutter="8">
+      <div nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label>Pick datetime</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker
+              nzShowTime
+              nzFormat="yyyy-MM-dd HH:mm:ss"
+              formControlName="inviteDate"
+              nzPlaceHolder="Select Time"
+              (nzOnOk)="onOk($event)"
+            ></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>
+  <div class="footer">
+    <button type="button" (click)="submitInvitation()" class="ant-btn ant-btn-primary"><span>Submit</span></button>
+    <button type="button" (click)="closeDrawer()" class="ant-btn" style="margin-right: 8px;"><span>Cancel</span></button>
+  </div>
+</nz-drawer>

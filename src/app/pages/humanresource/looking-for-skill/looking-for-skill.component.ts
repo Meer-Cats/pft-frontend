@@ -4,6 +4,7 @@ import {Employee} from '../../../models/employee';
 import {EmployeeApiService} from '../../../services/employee-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Observable, of} from 'rxjs';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-looking-for-skill',
@@ -12,7 +13,6 @@ import {Observable, of} from 'rxjs';
 })
 export class LookingForSkillComponent implements OnInit {
   public isVisible = false;
-  public isOkLoading = false;
 
   public skillsList: string[] = [];
   public selectedSkills: string[] = [];
@@ -22,16 +22,25 @@ export class LookingForSkillComponent implements OnInit {
 
   public loading = false;
 
+  validateForm: FormGroup;
+
   constructor(
     private sanitizer: DomSanitizer,
     private bannerService: BannerService,
+    private formBuilder: FormBuilder,
     private employeeService: EmployeeApiService) {
     bannerService.show$.next(true);
-    this.employeeService.getAll().subscribe(employees => this.employees = employees);
   }
 
   ngOnInit() {
     this.initSkillsList();
+    this.initEmployees();
+
+    this.validateForm = this.formBuilder.group({
+      subject: [null, [Validators.required]],
+      message: [null, [Validators.required]],
+      inviteDate: [null, [Validators.required]]
+    });
   }
 
   public update() {
@@ -53,6 +62,10 @@ export class LookingForSkillComponent implements OnInit {
     this.loading = false;
   }
 
+  private initEmployees(): void {
+    this.employeeService.getAll().subscribe(employees => this.employees = employees);
+  }
+
   public selectEmployee(employee: Employee) {
     if (!this.selectedEmployees.includes(employee)) {
       this.selectedEmployees.push(employee);
@@ -64,19 +77,32 @@ export class LookingForSkillComponent implements OnInit {
     }
   }
 
-  public showModal(): void {
+  public showDrawer(): void {
     this.isVisible = true;
   }
 
-  public handleOk(): void {
-    this.isOkLoading = true;
-    setTimeout(() => {
-      this.isVisible = false;
-      this.isOkLoading = false;
-    }, 3000);
+  public closeDrawer(): void {
+    this.isVisible = false;
   }
 
-  public handleCancel(): void {
-    this.isVisible = false;
+  public onOk(result: Date): void {}
+
+  public submitInvitation(): void {
+    const mails: string[] = this.selectedEmployees.map(e => e.mail);
+    const subject: string = this.validateForm.controls.subject.value;
+    const message: string = this.validateForm.controls.message.value;
+    const inviteDate: Date = this.validateForm.controls.inviteDate.value;
+
+    console.log(mails);
+    console.log(subject);
+    console.log(message);
+    console.log(inviteDate);
+
+    this.employeeService.invite(mails, subject, message, inviteDate)
+      .subscribe(() => {
+          this.closeDrawer();
+          // TODO: ajouter une alerte
+        }
+      );
   }
 }
