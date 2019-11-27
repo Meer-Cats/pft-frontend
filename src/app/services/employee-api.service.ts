@@ -39,42 +39,22 @@ export class EmployeeApiService {
   public getAll(): Employee[] {
     const employees: Employee[] = [];
     employees.push({
-      email: 'test@gmail.com', name: 'TEST', surname: 'Test', photo: '',
+      email: 'test1@gmail.com', name: 'TEST', surname: 'Test', photo: '',
       hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
     });
 
     employees.push({
-      email: 'test@gmail.com', name: 'TEST', surname: 'Test', photo: '',
+      email: 'test2@gmail.com', name: 'TEST', surname: 'Test', photo: '',
       hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
     });
 
     employees.push({
-      email: 'test@gmail.com', name: 'TEST', surname: 'Test', photo: '',
+      email: 'test3@gmail.com', name: 'TEST', surname: 'Test', photo: '',
       hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
     });
 
     employees.push({
-      email: 'test@gmail.com', name: 'TEST', surname: 'Test', photo: '',
-      hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
-    });
-
-    employees.push({
-      email: 'test@gmail.com', name: 'TEST', surname: 'Test', photo: '',
-      hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
-    });
-
-    employees.push({
-      email: 'test@gmail.com', name: 'TEST', surname: 'Test', photo: '',
-      hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
-    });
-
-    employees.push({
-      email: 'test@gmail.com', name: 'TEST', surname: 'Test', photo: '',
-      hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
-    });
-
-    employees.push({
-      email: 'test@gmail.com', name: 'TEST', surname: 'Test', photo: '',
+      email: 'test4@gmail.com', name: 'TEST', surname: 'Test', photo: '',
       hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
     });
     return employees;

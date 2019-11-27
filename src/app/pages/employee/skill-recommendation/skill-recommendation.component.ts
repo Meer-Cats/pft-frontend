@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Employee} from '../../../models/employee';
 import {EmployeeApiService} from '../../../services/employee-api.service';
 
@@ -13,24 +13,11 @@ export class SkillRecommendationComponent implements OnInit {
   public loading = false ;
 
   public employees: Employee[] = [];
-
-  public data = [
-    {
-      title: 'Title 1'
-    },
-    {
-      title: 'Title 2'
-    },
-    {
-      title: 'Title 3'
-    },
-    {
-      title: 'Title 4'
-    }
-  ];
+  public selectedEmployeesEmails: Set<string> = new Set<string>();
 
   constructor(
-    private employeeService: EmployeeApiService
+    private employeeService: EmployeeApiService,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -42,4 +29,14 @@ export class SkillRecommendationComponent implements OnInit {
     this.employees = this.employeeService.getAll();
     this.loading = false;
   }
+
+  public selectEmployee(email: string): void {
+    if (this.selectedEmployeesEmails.has(email)) {
+      this.selectedEmployeesEmails.delete(email);
+    } else {
+      this.selectedEmployeesEmails.add(email);
+    }
+  }
+
+  public submit(): void {}
 }

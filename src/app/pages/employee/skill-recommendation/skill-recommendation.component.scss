@@ -6,3 +6,13 @@
 .plop {
   background: transparent;
 }
+
+nz-card:hover {
+  border-color: deeppink;
+  color: deeppink;
+  cursor: pointer;
+}
+
+nz-card:active, nz-card.active {
+  background: greenyellow;
+}

@@ -4,7 +4,7 @@
   </div>
   <div>
     <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-      <input type="text" nz-input placeholder="input search text" />
+      <input type="text" nz-input placeholder="input search text"/>
     </nz-input-group>
     <ng-template #suffixIconButton>
       <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
@@ -13,14 +13,13 @@
   <div>
     <nz-list [nzDataSource]="employees" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
       <ng-template #item let-item>
-        <nz-list-item [nzContent]="nzContent">
+        <nz-list-item [nzContent]="nzContent" (click)="selectEmployee(item.email)">
           <ng-template #nzContent>
-            <nz-card style="width: 300px;margin-top: 16px">
+            <nz-card style="width: 300px;margin-top: 16px" [class.active]="selectedEmployeesEmails.has(item.email)">
               <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
                 <nz-card-meta
                   [nzAvatar]="avatarTemplate"
                   [nzTitle]="item.name + ' ' + item.surname"
-                  nzDescription="This is the description"
                 ></nz-card-meta>
               </nz-skeleton>
             </nz-card>
@@ -33,6 +32,6 @@
     </nz-list>
   </div>
   <div>
-    <button nz-button [nzSize]="500" nzType="primary">Recommend</button>
+    <button nz-button [nzSize]="500" nzType="primary" (click)="submit()">Recommend</button>
   </div>
 </nz-layout>
