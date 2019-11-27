@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Employee} from '../models/employee';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {ApiCollectionResponse} from './api-collection-response';
 import {User} from '../models/user';
+import {IApiCollection} from './api-collection';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class EmployeeApiService {
   private loginUrl = 'http://192.168.43.200:8080/session/login';
   private logoutUrl = '';
   private searchUrl = '';
+  private employeesUrl = 'http://192.168.43.200:8080/all';
+  private recommendUrl = 'http://192.168.43.200:8080/recommend';
 
   public constructor(
     private http: HttpClient
@@ -36,27 +39,16 @@ export class EmployeeApiService {
       );
   }
 
-  public getAll(): Employee[] {
-    const employees: Employee[] = [];
-    employees.push({
-      email: 'test1@gmail.com', name: 'TEST', surname: 'Test', photo: '',
-      hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
-    });
+  public getAll(): Observable<Employee[]> {
+    return this.http
+      .get<Employee[]>(this.employeesUrl)
+      .pipe(
+        map( result => result instanceof HttpErrorResponse ? [] : result)
+      );
+  }
 
-    employees.push({
-      email: 'test2@gmail.com', name: 'TEST', surname: 'Test', photo: '',
-      hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
-    });
-
-    employees.push({
-      email: 'test3@gmail.com', name: 'TEST', surname: 'Test', photo: '',
-      hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
-    });
-
-    employees.push({
-      email: 'test4@gmail.com', name: 'TEST', surname: 'Test', photo: '',
-      hs_java: 9, hs_javascript: 8, hs_python: 4, ss_management: 2, ss_scrum: 3
-    });
-    return employees;
+  public recommend(email: string): Observable<string> {
+    return this.http
+      .post<string>(this.recommendUrl, {employee: email});
   }
 }

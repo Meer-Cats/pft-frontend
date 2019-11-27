@@ -13,9 +13,9 @@
   <div>
     <nz-list [nzDataSource]="employees" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
       <ng-template #item let-item>
-        <nz-list-item [nzContent]="nzContent" (click)="selectEmployee(item.email)">
+        <nz-list-item [nzContent]="nzContent" (click)="selectEmployee(item.mail)">
           <ng-template #nzContent>
-            <nz-card style="width: 300px;margin-top: 16px" [class.active]="selectedEmployeesEmails.has(item.email)">
+            <nz-card style="width: 300px;margin-top: 16px" [class.active]="selectedEmployeeEmail === item.mail">
               <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
                 <nz-card-meta
                   [nzAvatar]="avatarTemplate"

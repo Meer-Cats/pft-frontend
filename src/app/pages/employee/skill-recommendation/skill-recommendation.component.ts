@@ -13,7 +13,7 @@ export class SkillRecommendationComponent implements OnInit {
   public loading = false ;
 
   public employees: Employee[] = [];
-  public selectedEmployeesEmails: Set<string> = new Set<string>();
+  public selectedEmployeeEmail = '';
 
   constructor(
     private employeeService: EmployeeApiService,
@@ -26,17 +26,19 @@ export class SkillRecommendationComponent implements OnInit {
 
   private initEmployees(): void {
     this.loading = true;
-    this.employees = this.employeeService.getAll();
-    this.loading = false;
+    this.employeeService.getAll().subscribe(employees => {
+        this.employees = employees;
+        this.loading = false;
+        console.log(this.employees);
+      }
+    );
   }
 
   public selectEmployee(email: string): void {
-    if (this.selectedEmployeesEmails.has(email)) {
-      this.selectedEmployeesEmails.delete(email);
-    } else {
-      this.selectedEmployeesEmails.add(email);
-    }
+    this.selectedEmployeeEmail = email;
   }
 
-  public submit(): void {}
+  public submit(): void {
+    this.employeeService.recommend(this.selectedEmployeeEmail).subscribe();
+  }
 }
