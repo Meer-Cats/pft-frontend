@@ -27,19 +27,23 @@ export class EmployeeApiService {
     return this.http.post<User>(this.loginUrl, {mail, password}, { headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Methods': 'OPTIONS, POST',
       }), withCredentials: true});
   }
 
   public logout(employee: Employee): Observable<Employee> {
     return this.http
-      .post<Employee>(this.logoutUrl, employee);
+      .post<Employee>(this.logoutUrl, employee, { headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }), withCredentials: true});
   }
 
   public search(skills: string[]): Observable<Employee[]> {
     return this.http
-      .get<ApiCollectionResponse<Employee>>(this.searchUrl.concat('?skills=[', ...skills, ']'))
+      .get<ApiCollectionResponse<Employee>>(this.searchUrl.concat('?skills=[', ...skills, ']'), { headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }), withCredentials: true})
       .pipe(
         map(r => r.data.items)
       );
@@ -47,7 +51,10 @@ export class EmployeeApiService {
 
   public getAll(): Observable<Employee[]> {
     return this.http
-      .get<Employee[]>(this.employeesUrl)
+      .get<Employee[]>(this.employeesUrl, { headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }), withCredentials: true})
       .pipe(
         map(result => result instanceof HttpErrorResponse ? [] : result)
       );
@@ -55,12 +62,18 @@ export class EmployeeApiService {
 
   public recommend(email: string, key: string): Observable<string> {
     return this.http
-      .post<string>(this.recommendUrl, {employee: email, key});
+      .post<string>(this.recommendUrl, {employee: email, key}, { headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }), withCredentials: true});
   }
 
   public getQuestion(): Observable<Question> {
     return this.http
-      .get<Question>(this.recommendUrl)
+      .get<Question>(this.recommendUrl, { headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }), withCredentials: true})
       .pipe(
         map(result => result instanceof HttpErrorResponse ? null : result)
       );
@@ -68,6 +81,9 @@ export class EmployeeApiService {
 
   invite(mails: string[], subject: string, message: string, inviteDate: Date): Observable<void> {
     return this.http
-      .post<void>(this.inviteUrl, {employee: mails, subject, body: message, inviteDate});
+      .post<void>(this.inviteUrl, {employee: mails, subject, body: message, inviteDate}, { headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }), withCredentials: true});
   }
 }
