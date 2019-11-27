@@ -2,6 +2,18 @@ nz-select {
   width: 100%;
 }
 
-.plop {
-  background: transparent;
+nz-card:hover {
+  border-color: #412554;
+  color: #412554;
+  cursor: pointer;
+}
+
+nz-card:active, nz-card.active {
+  background: #ad777c;
+  border-color: #412554;
+  color: #412554;
+}
+
+span.ant-input-group-addon {
+  background-color: transparent;
 }

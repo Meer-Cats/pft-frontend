@@ -6,7 +6,7 @@
     <nz-select
       [nzMaxTagCount]="3"
       [nzMaxTagPlaceholder]="tagPlaceHolder"
-      nzMode="single"
+      nzMode="multiple"
       nzPlaceHolder="Please select"
       [(ngModel)]="selectedSkills"
       (ngModelChange)="update()"
@@ -18,17 +18,21 @@
   <div>
     <nz-list [nzDataSource]="employees" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
       <ng-template #item let-item>
-        <nz-card (click)="selectEmployee(item)" nzHoverable style="width: 300px;margin-top: 16px">
-          <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
-            <nz-card-meta
-              [nzAvatar]="avatarTemplate"
-              nzTitle="{{item.name}} {{item.surname}}"
-            ></nz-card-meta>
-          </nz-skeleton>
-        </nz-card>
-        <ng-template #avatarTemplate>
-          <nz-avatar [nzSrc]="getAvatar(item)"></nz-avatar>
-        </ng-template>
+        <nz-list-item [nzContent]="nzContent" (click)="selectEmployee(item)">
+          <ng-template #nzContent>
+            <nz-card style="width: 300px;margin-top: 16px" [class.active]="selectedEmployees.includes(item)">
+              <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
+                <nz-card-meta
+                  [nzAvatar]="avatarTemplate"
+                  nzTitle="{{item.name}} {{item.surname}}"
+                ></nz-card-meta>
+              </nz-skeleton>
+            </nz-card>
+            <ng-template #avatarTemplate>
+              <nz-avatar [nzSrc]="getAvatar(item)"></nz-avatar>
+            </ng-template>
+          </ng-template>
+        </nz-list-item>
       </ng-template>
     </nz-list>
   </div>
