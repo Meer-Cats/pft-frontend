@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Employee} from '../../../models/employee';
+import {EmployeeApiService} from '../../../services/employee-api.service';
 
 @Component({
   selector: 'app-skill-recommendation',
@@ -9,6 +11,8 @@ export class SkillRecommendationComponent implements OnInit {
 
   public skill = 'Java';
   public loading = false ;
+
+  public employees: Employee[] = [];
 
   public data = [
     {
@@ -25,9 +29,17 @@ export class SkillRecommendationComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private employeeService: EmployeeApiService
+  ) { }
 
   ngOnInit() {
+    this.initEmployees();
   }
 
+  private initEmployees(): void {
+    this.loading = true;
+    this.employees = this.employeeService.getAll();
+    this.loading = false;
+  }
 }

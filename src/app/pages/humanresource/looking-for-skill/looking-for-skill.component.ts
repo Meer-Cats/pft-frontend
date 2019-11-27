@@ -34,11 +34,13 @@ export class LookingForSkillComponent implements OnInit {
   }
 
   private initSkillsList(): void {
+    this.loading = true;
     this.skillsList.push({ id: '1', name: 'Java' });
     this.skillsList.push({ id: '2', name: 'JS' });
     this.skillsList.push({ id: '3', name: 'Python' });
     this.skillsList.push({ id: '4', name: 'Scrum' });
     this.skillsList.push({ id: '5', name: 'Management' });
+    this.loading = false;
   }
 
 

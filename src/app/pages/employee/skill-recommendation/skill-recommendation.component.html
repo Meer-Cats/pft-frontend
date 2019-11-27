@@ -11,13 +11,13 @@
     </ng-template>
   </div>
   <div>
-    <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
+    <nz-list [nzDataSource]="employees" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
       <ng-template #item let-item>
         <nz-card style="width: 300px;margin-top: 16px">
           <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
             <nz-card-meta
               [nzAvatar]="avatarTemplate"
-              nzTitle="Card title"
+              nzTitle="{{}}"
               nzDescription="This is the description"
             ></nz-card-meta>
           </nz-skeleton>
