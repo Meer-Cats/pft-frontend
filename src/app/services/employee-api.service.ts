@@ -2,10 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Employee} from '../models/employee';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {ApiCollectionResponse} from './api-collection-response';
 import {User} from '../models/user';
-import {IApiCollection} from './api-collection';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +12,8 @@ import {IApiCollection} from './api-collection';
 export class EmployeeApiService {
   private loginUrl = 'http://192.168.43.200:8080/session/login';
   private logoutUrl = '';
-  private searchUrl = '';
-  private employeesUrl = 'http://192.168.43.200:8080/all';
+  private searchUrl = 'http://192.168.43.200:8080/search';
+  private employeesUrl = 'http://192.168.43.200:8080/employee/all';
   private recommendUrl = 'http://192.168.43.200:8080/recommend';
 
   public constructor(
@@ -43,7 +42,7 @@ export class EmployeeApiService {
     return this.http
       .get<Employee[]>(this.employeesUrl)
       .pipe(
-        map( result => result instanceof HttpErrorResponse ? [] : result)
+        map(result => result instanceof HttpErrorResponse ? [] : result)
       );
   }
 

@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {BannerService} from '../../../services/banner.service';
+import {Employee} from '../../../models/employee';
+import {EmployeeApiService} from '../../../services/employee-api.service';
 
 @Component({
   selector: 'app-looking-for-skill',
@@ -7,30 +10,25 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LookingForSkillComponent implements OnInit {
 
-  public skillsList: Array<{ id: string, name: string }> = [];
-  public selectedSkills: Array<{ id: string, name: string }> = [];
+  public skillsList: { id: string, name: string }[] = [];
+  public selectedSkill: { id: string, name: string };
 
-  public loading = false ;
+  public loading = false;
 
-  public data = [
-    {
-      title: 'Title 1'
-    },
-    {
-      title: 'Title 2'
-    },
-    {
-      title: 'Title 3'
-    },
-    {
-      title: 'Title 4'
-    }
-  ];
+  public data: Employee[] = [];
 
-  constructor() { }
+  constructor(private bannerService: BannerService, private employeeService: EmployeeApiService) {
+    bannerService.show$.next(true);
+  }
 
   ngOnInit() {
     this.initSkillsList();
+
+    this.employeeService.getAll().subscribe(employees => this.data = employees);
+  }
+
+  public update() {
+    this.employeeService.search(this.selectedSkill.name).subscribe(employees => this.data = employees);
   }
 
   private initSkillsList(): void {

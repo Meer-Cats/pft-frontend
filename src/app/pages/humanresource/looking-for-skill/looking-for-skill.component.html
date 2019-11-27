@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout class="plop">
   <div>
     <h2 nz-title>Looking for a skill ?</h2>
   </div>
@@ -6,9 +6,10 @@
     <nz-select
       [nzMaxTagCount]="3"
       [nzMaxTagPlaceholder]="tagPlaceHolder"
-      nzMode="multiple"
+      nzMode="single"
       nzPlaceHolder="Please select"
-      [(ngModel)]="selectedSkills"
+      [(ngModel)]="selectedSkill"
+      (ngModelChange)="update()"
     >
       <nz-option *ngFor="let skill of skillsList" [nzLabel]="skill.name" [nzValue]="skill.id"></nz-option>
     </nz-select>
@@ -33,6 +34,6 @@
     </nz-list>
   </div>
   <div>
-    <button nz-button [nzSize]="500" nzType="primary">Request</button>
+    <button nz-button nzType="primary">Request</button>
   </div>
 </nz-layout>
