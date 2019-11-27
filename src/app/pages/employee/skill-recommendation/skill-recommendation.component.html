@@ -1,17 +1,17 @@
 <nz-layout class="plop">
   <div>
-    <h2 nz-title>Who will you ask for {{skill}} questions </h2>
+    <h2 nz-title>{{question.message}}</h2>
   </div>
   <div>
     <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-      <input type="text" nz-input placeholder="input search text"/>
+      <input type="text" nz-input placeholder="input search text" (keyup)="filter($event)" />
     </nz-input-group>
     <ng-template #suffixIconButton>
       <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
     </ng-template>
   </div>
   <div>
-    <nz-list [nzDataSource]="employees" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
+    <nz-list [nzDataSource]="filteredEmployees" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
       <ng-template #item let-item>
         <nz-list-item [nzContent]="nzContent" (click)="selectEmployee(item.mail)">
           <ng-template #nzContent>
@@ -19,12 +19,13 @@
               <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
                 <nz-card-meta
                   [nzAvatar]="avatarTemplate"
-                  [nzTitle]="item.name + ' ' + item.surname"
+                  nzTitle="{{item.name}} {{item.surname}}"
                 ></nz-card-meta>
               </nz-skeleton>
             </nz-card>
             <ng-template #avatarTemplate>
-              <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+              <nz-avatar *ngIf="!item.avatar" nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+              <nz-avatar *ngIf="item.avatar" [nzSrc]="sanitizer.bypassSecurityTrustUrl('data:image/png;base64, ' + item.avatar)"></nz-avatar>
             </ng-template>
           </ng-template>
         </nz-list-item>

@@ -5,6 +5,7 @@ import {Employee} from '../models/employee';
 import {map} from 'rxjs/operators';
 import {ApiCollectionResponse} from './api-collection-response';
 import {User} from '../models/user';
+import {Question} from '../models/question';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class EmployeeApiService {
   private logoutUrl = '';
   private searchUrl = 'http://192.168.43.200:8080/search';
   private employeesUrl = 'http://192.168.43.200:8080/employee/all';
-  private recommendUrl = 'http://192.168.43.200:8080/recommend';
+  private recommendUrl = 'http://192.168.43.200:8080/employee/recommend';
 
   public constructor(
     private http: HttpClient
@@ -22,7 +23,7 @@ export class EmployeeApiService {
   }
 
   public login(mail: string, password: string): Observable<User> {
-    return this.http.post<User>(this.loginUrl, {mail, password});
+    return this.http.post<User>(this.loginUrl, {mail, password}, {withCredentials: true});
   }
 
   public logout(employee: Employee): Observable<Employee> {
@@ -46,8 +47,16 @@ export class EmployeeApiService {
       );
   }
 
-  public recommend(email: string): Observable<string> {
+  public recommend(email: string, key: string): Observable<string> {
     return this.http
-      .post<string>(this.recommendUrl, {employee: email});
+      .post<string>(this.recommendUrl, {employee: email, key});
+  }
+
+  public getQuestion(): Observable<Question> {
+    return this.http
+      .get<Question>(this.recommendUrl)
+      .pipe(
+        map(result => result instanceof HttpErrorResponse ? null : result)
+      );
   }
 }
