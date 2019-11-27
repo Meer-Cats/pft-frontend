@@ -8,5 +8,4 @@ export interface Employee {
   hs_javascript: number;
   ss_scrum: number;
   ss_management: number;
-  random: number;
 }
