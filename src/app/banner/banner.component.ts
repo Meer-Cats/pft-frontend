@@ -8,6 +8,6 @@ import {CurrentUserService} from '../services/current-user.service';
   styleUrls: ['./banner.component.scss']
 })
 export class BannerComponent {
-  constructor(private s: BannerService, private user: CurrentUserService) {
+  constructor(public s: BannerService, protected  user: CurrentUserService) {
   }
 }

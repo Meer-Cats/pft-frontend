@@ -11,12 +11,12 @@ import {Question} from '../models/question';
   providedIn: 'root'
 })
 export class EmployeeApiService {
-  private loginUrl = 'http://localhost:8080/session/login';
-  private logoutUrl = 'http://localhost:8080/session/logout';
-  private searchUrl = 'http://localhost:8080/employee/search';
-  private employeesUrl = 'http://localhost:8080/employee/all';
-  private recommendUrl = 'http://localhost:8080/employee/recommend';
-  private inviteUrl = 'http://localhost:8080/employee/invite';
+  private loginUrl = '/session/login';
+  private logoutUrl = '/session/logout';
+  private searchUrl = '/employee/search';
+  private employeesUrl = '/employee/all';
+  private recommendUrl = '/employee/recommend';
+  private inviteUrl = '/employee/invite';
 
   public constructor(
     private http: HttpClient
