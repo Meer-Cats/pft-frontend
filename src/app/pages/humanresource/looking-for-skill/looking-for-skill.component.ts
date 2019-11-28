@@ -15,7 +15,7 @@ import {NzNotificationService} from 'ng-zorro-antd';
 export class LookingForSkillComponent implements OnInit {
   public isVisible = false;
 
-  public skillsList: string[] = [];
+  public skillsList: string[] = ['Java', 'JS', 'Python', 'Scrum', 'Management'];
   public selectedSkills: string[] = [];
 
   public employees$: Subject<Employee[]> = new BehaviorSubject([]);
@@ -33,10 +33,10 @@ export class LookingForSkillComponent implements OnInit {
     private employeeService: EmployeeApiService,
     private cd: ChangeDetectorRef) {
     bannerService.show$.next(true);
+    this.selectedEmployees$.subscribe(_ => this.cd.detectChanges());
   }
 
   ngOnInit() {
-    this.initSkillsList();
     this.initEmployees();
 
     this.validateForm = this.formBuilder.group({
@@ -73,7 +73,6 @@ export class LookingForSkillComponent implements OnInit {
 
   public showDrawer(): void {
     this.isVisible = true;
-    this.selectedEmployees$.next(this.selectedEmployees$.getValue());
   }
 
   public closeDrawer(): void {
@@ -108,14 +107,6 @@ export class LookingForSkillComponent implements OnInit {
           );
         }
       );
-  }
-
-  private initSkillsList(): void {
-    this.skillsList.push('Java');
-    this.skillsList.push('JS');
-    this.skillsList.push('Python');
-    this.skillsList.push('Scrum');
-    this.skillsList.push('Management');
   }
 
   private initEmployees(): void {

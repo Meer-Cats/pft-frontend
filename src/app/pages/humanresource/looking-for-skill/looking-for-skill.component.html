@@ -13,10 +13,11 @@
     >
       <nz-option *ngFor="let skill of skillsList" [nzLabel]="skill" [nzValue]="skill"></nz-option>
     </nz-select>
-    <ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected </ng-template>
+    <ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected</ng-template>
   </div>
   <div>
-    <nz-list [nzDataSource]="employees$ | async" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }" [nzLoading]="loading$ | async">
+    <nz-list [nzDataSource]="employees$ | async" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }"
+             [nzLoading]="loading$ | async">
       <ng-template #item let-item>
         <nz-list-item [nzContent]="nzContent" (click)="selectEmployee(item)">
           <ng-template #nzContent>
@@ -49,26 +50,13 @@
   nzTitle="Employees invitation"
   (nzOnClose)="closeDrawer()"
 >
-  <div>
-    <h4 nz-title>Selected employees</h4>
-  </div>
-  <nz-list [nzDataSource]="selectedEmployees$ | async" [nzRenderItem]="itemx" [nzGrid]="{ gutter: 16, xs: 24, sm: 12, md: 6, lg: 6, xl: 4 }">
-    <ng-template #itemx let-item>
-      <nz-list-item [nzContent]="nzContentx">
-        <ng-template #nzContentx>
-          <nz-avatar [nzSrc]="getAvatar(item) | async"></nz-avatar>
-        </ng-template>
-      </nz-list-item>
-    </ng-template>
-  </nz-list>
-
   <form nz-form [formGroup]="validateForm">
     <div nz-row nzGutter="8">
       <div nz-col nzSpan="24">
         <nz-form-item>
           <nz-form-label>Subject</nz-form-label>
           <nz-form-control>
-            <input type="text" nz-input formControlName="subject" placeholder="Please, enter a mail subject" />
+            <input type="text" nz-input formControlName="subject" placeholder="Please, enter a mail subject"/>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -108,7 +96,8 @@
     </div>
   </form>
   <div class="footer">
-    <button type="button" (click)="submitInvitation()" class="ant-btn ant-btn-primary" style="margin-right: 8px;"><span>Submit</span></button>
+    <button type="button" (click)="submitInvitation()" class="ant-btn ant-btn-primary" style="margin-right: 8px;"><span>Submit</span>
+    </button>
     <button type="button" (click)="closeDrawer()" class="ant-btn"><span>Cancel</span></button>
   </div>
 </nz-drawer>
