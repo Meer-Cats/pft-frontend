@@ -11,11 +11,11 @@ import {Question} from '../models/question';
   providedIn: 'root'
 })
 export class EmployeeApiService {
-  private loginUrl = 'http://192.168.43.200:8080/session/login';
-  private logoutUrl = '';
-  private searchUrl = 'http://192.168.43.200:8080/employee/search';
-  private employeesUrl = 'http://192.168.43.200:8080/employee/all';
-  private recommendUrl = 'http://192.168.43.200:8080/employee/recommend';
+  private loginUrl = 'http://localhost:8080/session/login';
+  private logoutUrl = 'http://localhost:8080/session/logout';
+  private searchUrl = 'http://localhost:8080/employee/search';
+  private employeesUrl = 'http://localhost:8080/employee/all';
+  private recommendUrl = 'http://localhost:8080/employee/recommend';
   private inviteUrl = 'http://localhost:8080/employee/invite';
 
   public constructor(

@@ -16,12 +16,12 @@
     <ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected </ng-template>
   </div>
   <div>
-    <nz-list [nzDataSource]="employees" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
+    <nz-list [nzDataSource]="employees$ | async" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }" [nzLoading]="loading$ | async">
       <ng-template #item let-item>
         <nz-list-item [nzContent]="nzContent" (click)="selectEmployee(item)">
           <ng-template #nzContent>
-            <nz-card style="width: 300px;margin-top: 16px" [class.active]="selectedEmployees.includes(item)">
-              <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
+            <nz-card style="width: 300px;margin-top: 16px" [class.active]="(selectedEmployees$ | async).includes(item)">
+              <nz-skeleton [nzActive]="true" [nzLoading]="loading$ | async" [nzAvatar]="{ size: 'large' }">
                 <nz-card-meta
                   [nzAvatar]="avatarTemplate"
                   nzTitle="{{item.name}} {{item.surname}}"
@@ -52,10 +52,10 @@
   <div>
     <h4 nz-title>Selected employees</h4>
   </div>
-  <nz-list [nzDataSource]="selectedEmployees" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, xs: 24, sm: 12, md: 6, lg: 6, xl: 4 }">
-    <ng-template #item let-item>
-      <nz-list-item [nzContent]="nzContent">
-        <ng-template #nzContent>
+  <nz-list [nzDataSource]="selectedEmployees$ | async" [nzRenderItem]="itemx" [nzGrid]="{ gutter: 16, xs: 24, sm: 12, md: 6, lg: 6, xl: 4 }">
+    <ng-template #itemx let-item>
+      <nz-list-item [nzContent]="nzContentx">
+        <ng-template #nzContentx>
           <nz-avatar [nzSrc]="getAvatar(item) | async"></nz-avatar>
         </ng-template>
       </nz-list-item>
